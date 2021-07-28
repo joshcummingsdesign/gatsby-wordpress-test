@@ -1,0 +1,22 @@
+{
+  "name": "givewp/givewp-docs",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "The GiveWP docs",
+  "homepage": "https://givewp.com/documentation",
+  "autoload": {
+    "files": [
+      "src/Helpers/app.php"
+    ],
+    "psr-4": {
+      "GiveDocs\\": "src/"
+    }
+  },
+  "require": {
+    "php-di/php-di": "^6.3",
+    "spatie/data-transfer-object": "^2.8"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}

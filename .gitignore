@@ -1,0 +1,38 @@
+# System
+.DS_Store
+.php_cs.cache
+
+# Dependencies
+node_modules
+vendor
+
+# Ignore everything except configuration and wp-content
+/*
+!.babelrc.json
+!.editorconfig
+!.env.example
+!.github
+!.gitignore
+!.lando.yml
+!.lintstagedrc.json
+!.php-cs-fixer.php
+!.prettierignore
+!.prettierrc.json
+!README.md
+!composer.json
+!composer.lock
+!cypress.json
+!package.json
+!phpcs.xml
+!scripts
+!webpack.mix.js
+!wp-content
+!yarn.lock
+
+# Ignore everything in wp-content except plugins
+wp-content/*
+!wp-content/plugins
+
+# Only version the plugins we want
+wp-content/plugins/*
+!wp-content/plugins/givewp-docs

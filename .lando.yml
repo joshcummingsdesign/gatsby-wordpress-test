@@ -1,0 +1,53 @@
+name: givewp-docs
+recipe: wordpress
+config:
+  php: '7.4'
+  database: mariadb:10.3
+  webroot: .
+  via: nginx
+  xdebug: off
+services:
+  appserver:
+    build_as_root:
+      - apt-get update -y && apt-get install -y subversion
+    overrides:
+      environment:
+        XDEBUG_MODE:
+      volumes:
+        - /tmp:/tmp
+  database:
+    portforward: 3307
+  database_testing:
+    type: mysql:5.7
+    creds:
+      user: wordpress
+      password: wordpress
+      database: wordpress
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver_nginx
+      - appserver
+tooling:
+  setup-tests:
+    service: appserver
+    description: Runs the phpunit installer
+    dir: /app/wp-content/plugins/givewp-website/tests/bin
+    cmd: ./install.sh wordpress wordpress wordpress database_testing
+  watch-tests:
+    service: appserver
+    description: Runs the phpunit watcher
+    dir: /app/wp-content/plugins/givewp-website
+    cmd: ./vendor/bin/phpunit-watcher watch
+  debug-log:
+    service: appserver
+    description: Watches WordPress errors
+    dir: /app/wp-content
+    cmd: tail -f debug.log
+  xdebug:
+    service: appserver
+    description: Loads Xdebug in the selected mode
+    dir: /app/scripts
+    cmd: ./xdebug.sh
+    user: root
