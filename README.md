@@ -22,6 +22,10 @@ This is the GiveWP documentation website.
 
         lando wp core download --skip-content
 
+4.  Install the required plugins
+    - [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
+    - [WPGatsby](https://wordpress.org/plugins/wp-gatsby/)
+
 ## 🐞 Debugging
 
 ### WordPress Debug Log
